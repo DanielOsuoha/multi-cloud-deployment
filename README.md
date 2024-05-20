@@ -146,9 +146,137 @@ gcloud services enable servicenetworking.googleapis.com --project=$GOOGLE_CLOUD_
 ```
 **Attention**: The provisioning process can take between **15 to 25 minutes** to finish. Keep the **CloudShell** open during the process. If disconnected, click on **Reconnect** when the session expires (the session expires after **5 minutes** of inactivity by default)
 
-# Security Tips
+### Security Tips
 
 - For production environments, it's recommended to use only the Private Network for database access.
 - Never provide public network access (0.0.0.0/0) to production databases. ⚠️
+## Application Containerization and Deployment
+### Steps in Amazon Web Services (AWS)
+- Access AWS console and go to IAM service
+- Under Access management, Click in "Users", then "Add users". Insert the User name **luxxy-covid-testing-system-en-app1** and click in **Next** to create a programmatic user.
+![alt text](image-8.png)
+- On Set permissions, Permissions options, click in "Attach policies directly" button.
+![alt text](image-9.png)
+- Type **AmazonS3FullAccess** in **Search**.
+- Select **AmazonS3FullAccess**
+![alt text](image-10.png)
+- Click in **Next**
+- Review all details and click in Create user
+![alt text](image-11.png)
+
+#### **Steps to create access key:**
+
+- Click on the user you have created.
+- Go to Security credentials tab.
+- Scroll down and go to Access keys section.
+- Click on Create access key
+![alt text](image-12.png)
+- Select **Command Line Interface (CLI)** and **I understand the above recommendation and want to proceed to create an access key** checkbox.
+- Click Next
+- Click on Create access key
+- Click on Download .csv file
+- After download, click Done.
+- Now, rename .csv file downloaded to **luxxy-covid-testing-system-en-app1.csv**
+
+
+### Steps in Google Cloud Platform (GCP)
+
+- Navigate to Cloud SQL instance and create a new user **app** with password **welcome123456** on Cloud SQL MySQL database
+- Connect to Google Cloud Shell
+- **Download** the mission2 files to Google Cloud Shell using the wget command as shown below
+```
+cd ~
+```
+
+```
+**wget https://tcb-public-events.s3.amazonaws.com/icp/mission2.zip**
+```
+
+```
+unzip mission2.zip
+```
+- Connect to MySQL DB running on Cloud SQL (once it prompts for the password, provide welcome123456). Don’t forget to replace the placeholder with your Cloud SQL Public IP
+![alt text](image-13.png)
+```
+mysql --host=<replace_with_public_ip_cloudsql> --port=3306 -u app -p
+```
+Once you're connected to the database instance, create the products table for testing purposes
 
 This README file provides a comprehensive and detailed guide to implementing the project, covering all major steps and specific tasks involved.
+```
+use dbcovidtesting;
+```
+
+```
+source ~/mission2/en/db/create_table.sql
+```
+
+```
+show tables;
+```
+
+```
+exit;
+```
+
+- Enable Cloud Build API via Cloud Shell.
+gcloud services enable cloudbuild.googleapis.com
+![alt text](image-14.png)
+- Build the Docker image and push it to Google Container Registry.
+```
+GOOGLE_CLOUD_PROJECT_ID=$(gcloud config get-value project)
+```
+
+```
+cd ~/mission2/en/app
+```
+
+```
+gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT_ID/luxxy-covid-testing-system-app-en
+```
+
+- Open the Cloud Editor and edit the Kubernetes deployment file (luxxy-covid-testing-system.yaml) and update the variables below on line 33 in red with your <PROJECT_ID> on the Google Container Registry path, on line 42 AWS Bucket name, AWS Keys (open file luxxy-covid-testing-system-en-app1.csv and use Access key ID on line 44 and Secret access key on line 46)  and Cloud SQL Database Private IP on line 48.
+cd ~/mission2/en/kubernetes
+luxxy-covid-testing-system.yaml
+
+				image: gcr.io/<PROJECT_ID>/luxxy-covid-testing-system-app-en:latest
+...
+				- name: AWS_BUCKET
+          value: "luxxy-covid-testing-system-pdf-en-xxxx"
+        - name: S3_ACCESS_KEY
+          value: "xxxxxxxxxxxxxxxxxxxxx"
+        - name: S3_SECRET_ACCESS_KEY
+          value: "xxxxxxxxxxxxxxxxxxxx"
+        - name: DB_HOST_NAME
+          value: "172.21.0.3"
+- Connect to the GKE (Google Kubernetes Engine) cluster via Console
+##### Step 1
+![alt text](image-15.png)
+
+##### Step 2
+![alt text](image-16.png)
+
+- Deploy the application Luxxy in the Cluster
+```
+cd ~/mission2/en/kubernetes
+```
+
+```
+kubectl apply -f luxxy-covid-testing-system.yaml
+```
+
+- Under **GKE** > **Workloads** > **Exposing Services**, get the application Public IP
+    
+    **Step 1**
+![alt text](image-17.png)
+**Step 2**
+![alt text](image-18.png)
+
+- You should see the app up & running!
+![alt text](image-19.png)
+
+- (Optional) Download a sample COVID testing and add an entry in the application.
+    
+    **Click on the icon below to download the PDF ⬇️**
+    
+    [covid-testing.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0d1b678b-cd91-4256-93c7-73b2e82396d5/4154a4e6-d3f4-4e33-8720-f97076f19653/covid-testing.pdf)
