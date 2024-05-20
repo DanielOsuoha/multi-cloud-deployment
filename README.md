@@ -280,3 +280,71 @@ kubectl apply -f luxxy-covid-testing-system.yaml
     **Click on the icon below to download the PDF ⬇️**
     
     [covid-testing.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0d1b678b-cd91-4256-93c7-73b2e82396d5/4154a4e6-d3f4-4e33-8720-f97076f19653/covid-testing.pdf)
+
+
+## Cloud Migration and Database Management
+### Steps in Google Cloud Platform (Database Migration)
+
+- Connect to Google Cloud Shell
+- **Download** the dump using wget
+```
+cd ~
+```
+
+```
+**wget https://tcb-public-events.s3.amazonaws.com/icp/mission3.zip**
+```
+
+```
+unzip mission3.zip
+```
+
+- Connect to MySQL DB running on Cloud SQL (once it prompts for the password, provide welcome123456). Don’t forget to replace the placeholder with your Cloud SQL Public IP
+
+```
+mysql --host=**<replace_with_public_ip_cloudsql>** --port=3306 -u app -p
+```
+
+- Import the dump on Cloud SQL
+
+```
+use dbcovidtesting;
+```
+
+```
+source ~/mission3/en/db/db_dump.sql
+```
+- Check if the data got imported correctly
+```
+select * from records;
+```
+
+```
+exit;
+```
+
+### Steps in Amazon Web Services (PDF Files Migration)
+
+- Connect to the AWS Cloud Shell
+Download the PDF files
+-```
+wget https://tcb-public-events.s3.amazonaws.com/icp/mission3.zip
+```
+
+```
+unzip mission3.zip
+```
+
+- Sync PDF Files with your AWS S3 used for COVID-19 Testing Status System. Replace the bucket name with yours.
+
+```
+cd mission3/en/pdf_files
+```
+
+```
+aws s3 sync . s3://**luxxy-covid-testing-system-pdf-en-xxxx**
+```
+- Test the application. Upon migrating the data and files, you should be able to see the entries  under “View Guest Results” page.
+![alt text](image-20.png)
+
+Congratulations! You have migrated an "on-premises" application & database to a MultiCloud Architecture!
