@@ -7,7 +7,8 @@ This repository documents the steps and processes involved in provisioning infra
 2. [Application Containerization and Deployment](#application-containerization-and-deployment)
 3. [Cloud Migration and Database Management](#cloud-migration-and-database-management)
 
-
+## Cloud Architecture
+![alt text](image-21.png)
 ## Infrastructure Provisioning
 ### Steps in Amazon Web Services (AWS)
 #### Creating the terraform-en-1 user using the IAM service
