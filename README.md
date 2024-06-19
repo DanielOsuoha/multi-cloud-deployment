@@ -333,7 +333,7 @@ mysql --host=**<replace_with_public_ip_cloudsql>** --port=3306 -u app -p
 
 - Import the dump on Cloud SQL
 
-```text
+```sql
 use dbcovidtesting;
 ```
 
@@ -375,6 +375,7 @@ aws s3 sync . s3://**luxxy-covid-testing-system-pdf-en-xxxx**
 ```
 
 - Test the application. Upon migrating the data and files, you should be able to see the entries  under “View Guest Results” page.
+
 ![alt text](images/image-20.png)
 
 <!-- Congratulations! You have migrated an "on-premises" application & database to a MultiCloud Architecture! -->
