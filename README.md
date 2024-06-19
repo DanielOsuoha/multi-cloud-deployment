@@ -167,7 +167,8 @@ gcloud services enable servicenetworking.googleapis.com --project=$GOOGLE_CLOUD_
 ### Steps in Amazon Web Services (AWS)
 
 - Access AWS console and go to IAM service
-- Under Access management, Click in "Users", then "Add users". Insert the User name **luxxy-covid-testing-system-en-app1** and click in **Next** to create a programmatic user.
+- Under Access management, Click in "Users", then "Add users". Insert the User name 
+**luxxy-covid-testing-system-en-app1** and click in **Next** to create a programmatic user.
 ![alt text](images/image-8.png)
 - On Set permissions, Permissions options, click in "Attach policies directly" button.
 ![alt text](images/image-9.png)
