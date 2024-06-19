@@ -67,10 +67,6 @@ wget https://github.com/DanielOsuoha/multi-cloud-deployment/blob/main/missions/m
 
 - Upload the key.csv file to the Cloud Shell using the browser
 
-```bash
-wget https://github.com/DanielOsuoha/multi-cloud-deployment/blob/main/missions/mission3.zip
-```
-
 - Open the Cloud Shell
 
 - Verify if the mission1.zip and key.csv files are in the folder in the Cloud Shell using the command below
@@ -306,9 +302,9 @@ kubectl apply -f luxxy-covid-testing-system.yaml
 - You should see the app up & running!
 ![alt text](images/image-19.png)
 
-- (Optional) Download a sample COVID testing and add an entry in the application.
+<!-- - (Optional) Download a sample COVID testing and add an entry in the application.
 **Click on the icon below to download the PDF ⬇️**
-[covid-testing.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0d1b678b-cd91-4256-93c7-73b2e82396d5/4154a4e6-d3f4-4e33-8720-f97076f19653/covid-testing.pdf)
+[covid-testing.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0d1b678b-cd91-4256-93c7-73b2e82396d5/4154a4e6-d3f4-4e33-8720-f97076f19653/covid-testing.pdf) -->
 
 ## Cloud Migration and Database Management
 
