@@ -167,7 +167,7 @@ gcloud services enable servicenetworking.googleapis.com --project=$GOOGLE_CLOUD_
 ### Steps in Amazon Web Services (AWS)
 
 - Access AWS console and go to IAM service
-- Under Access management, Click in "Users", then "Add users". Insert the User name 
+- Under Access management, Click in "Users", then "Add users". Insert the User name.
 **luxxy-covid-testing-system-en-app1** and click in **Next** to create a programmatic user.
 ![alt text](images/image-8.png)
 - On Set permissions, Permissions options, click in "Attach policies directly" button.
@@ -204,7 +204,7 @@ cd ~
 ```
 
 ```bash
-wget https://tcb-public-events.s3.amazonaws.com/icp/mission2.zip
+wget https://github.com/DanielOsuoha/multi-cloud-deployment/blob/main/missions/mission3.zip
 ```
 
 ```bash
@@ -256,19 +256,26 @@ gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT_ID/luxxy-covid-testing-s
 ```
 
 - Open the Cloud Editor and edit the Kubernetes deployment file (luxxy-covid-testing-system.yaml) and update the variables below on line 33 in red with your <PROJECT_ID> on the Google Container Registry path, on line 42 AWS Bucket name, AWS Keys (open file luxxy-covid-testing-system-en-app1.csv and use Access key ID on line 44 and Secret access key on line 46)  and Cloud SQL Database Private IP on line 48.
-cd ~/mission2/en/kubernetes
-luxxy-covid-testing-system.yaml
 
-				image: gcr.io/<PROJECT_ID>/luxxy-covid-testing-system-app-en:latest
+```bash
+cd ~/mission2/en/kubernetes
+```
+
+```bash
+cat luxxy-covid-testing-system.yaml
+```
+
+image: gcr.io/<PROJECT_ID>/luxxy-covid-testing-system-app-en:latest
 ...
-				- name: AWS_BUCKET
-          value: "luxxy-covid-testing-system-pdf-en-xxxx"
-        - name: S3_ACCESS_KEY
-          value: "xxxxxxxxxxxxxxxxxxxxx"
-        - name: S3_SECRET_ACCESS_KEY
-          value: "xxxxxxxxxxxxxxxxxxxx"
-        - name: DB_HOST_NAME
-          value: "172.21.0.3"
+
+- name: AWS_BUCKET
+  value: "luxxy-covid-testing-system-pdf-en-xxxx"
+- name: S3_ACCESS_KEY
+  value: "xxxxxxxxxxxxxxxxxxxxx"
+- name: S3_SECRET_ACCESS_KEY
+  value: "xxxxxxxxxxxxxxxxxxxx"
+- name: DB_HOST_NAME
+  value: "172.21.0.3"
 
 - Connect to the GKE (Google Kubernetes Engine) cluster via Console
 
