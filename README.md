@@ -60,112 +60,112 @@ This repository documents the steps and processes involved in provisioning infra
 ![alt text](images/image-6.png)
 
 - Download the mission1.zip file in the Google Cloud shell using the wget command
- 
-- 
+
+```bash
+wget https://github.com/DanielOsuoha/multi-cloud-deployment/blob/main/missions/mission1.zip
+```
+
 - Upload the key.csv file to the Cloud Shell using the browser
 
 ```bash
-wget missions/mission3.zip
+wget https://github.com/DanielOsuoha/multi-cloud-deployment/blob/main/missions/mission3.zip
 ```
 
 - Open the Cloud Shell
+
 - Verify if the mission1.zip and key.csv files are in the folder in the Cloud Shell using the command below
-```
+
+```bash
 ls
+```
 
-```
-```
+```bash
 unzip mission1.zip
-
 ```
 
-```
+```bash
 mv key.csv mission1/en
-
 ```
 
-```
+```bash
 cd mission1/en
-
 ```
 
-```
+```bash
 chmod +x *.sh
+```
+
+- Execute the commands below to prepare the AWS and GCP environment
+
+```bash
+mkdir -p ~/.aws/
+```
+
+```bash
+touch ~/.aws/credentials_multiclouddeploy
+```
+
+```bash
+./aws_set_credentials.sh key.csv
 
 ```
-- Execute the commands below to prepare the AWS and GCP environment
-    
-    ```
-    mkdir -p ~/.aws/
-    
-    ```
-    
-    ```
-    touch ~/.aws/credentials_multiclouddeploy
-    
-    ```
-    
-    ```
-    ./aws_set_credentials.sh key.csv
-    
-    ```
-    
-    ```
-    GOOGLE_CLOUD_PROJECT_ID=$(gcloud config get-value project)
-    
-    ```
-    
-    ```
-    gcloud config set project $GOOGLE_CLOUD_PROJECT_ID
-    
-    ```
-    
+
+```bash
+GOOGLE_CLOUD_PROJECT_ID=$(gcloud config get-value project)
+
+```
+
+```bash
+gcloud config set project $GOOGLE_CLOUD_PROJECT_ID
+
+```
+
 - Click on Authorize
 ![alt text](images/image-7.png)
 
 - Execute the command below to set the project in the Google Cloud Shell
 ./gcp_set_project.sh
-
-​
 - Execute the commands to enable the Kubernetes, Container Registry, and Cloud SQL APIs
-```
+
+```bash
 gcloud services enable containerregistry.googleapis.com
-
 ```
 
-```
+```bash
 gcloud services enable container.googleapis.com
-
 ```
 
-```
+```bash
 gcloud services enable sqladmin.googleapis.com
-
 ```
 
-```
+```bash
 gcloud services enable cloudresourcemanager.googleapis.com
 ```
 
-```
+```bash
 gcloud services enable serviceusage.googleapis.com
 ```
 
-```
+```bash
 gcloud services enable compute.googleapis.com
 ```
 
-```
+```bash
 gcloud services enable servicenetworking.googleapis.com --project=$GOOGLE_CLOUD_PROJECT_ID
 ```
+
 **Attention**: The provisioning process can take between **15 to 25 minutes** to finish. Keep the **CloudShell** open during the process. If disconnected, click on **Reconnect** when the session expires (the session expires after **5 minutes** of inactivity by default)
 
 ### Security Tips
 
 - For production environments, it's recommended to use only the Private Network for database access.
 - Never provide public network access (0.0.0.0/0) to production databases. ⚠️
+
 ## Application Containerization and Deployment
+
 ### Steps in Amazon Web Services (AWS)
+
 - Access AWS console and go to IAM service
 - Under Access management, Click in "Users", then "Add users". Insert the User name **luxxy-covid-testing-system-en-app1** and click in **Next** to create a programmatic user.
 ![alt text](images/image-8.png)
@@ -203,7 +203,7 @@ cd ~
 ```
 
 ```bash
-**wget https://tcb-public-events.s3.amazonaws.com/icp/mission2.zip**
+wget https://tcb-public-events.s3.amazonaws.com/icp/mission2.zip
 ```
 
 ```bash
