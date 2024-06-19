@@ -8,7 +8,7 @@ This repository documents the steps and processes involved in provisioning infra
 3. [Cloud Migration and Database Management](#cloud-migration-and-database-management)
 
 ## Cloud Architecture
-![alt text](image-21.png)
+![alt text](images/architecture.png)
 ## Infrastructure Provisioning
 ### Steps in Amazon Web Services (AWS)
 #### Creating the terraform-en-1 user using the IAM service
@@ -16,30 +16,30 @@ This repository documents the steps and processes involved in provisioning infra
 - Access the AWS console ([https://aws.amazon.com](https://aws.amazon.com/)) **and log in with your newly created account**. In the search bar, type IAM. In the Services section, click on IAM.
 - Click on Users and then Add users, enter the name **terraform-en-1** and click Next to create a programmatic type user.
 
-![alt text](image.png)
+![alt text](images/creating_user.png)
 - After advancing, in Set permissions, click on the Attach existing policies directly button.
 - Type **AmazonS3FullAccess** in **Search.**
 - Select **AmazonS3FullAccess**
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 - Click on **Next**
 - Review all the details
 - Click on **Create user**
 #### Creating the Access Key for the terraform-en-1 user using the IAM service
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 - Click on the Security credentials tab
 
 - Access the **terraform-en-1** user
 - Navigate to the **Access keys** section
 - Click on **Create access key**
 
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 
 - Select Command Line Interface (CLI) and I understand the above recommendation and want to proceed to create an access key.
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 - Click on **Next**.
 - Click on **Create access key**
-![alt text](image-5.png)
+![alt text](images/image-5.png)
 - Click on Download .csv file
 - Once the download is complete, rename the .csv file to key.csv.
 
@@ -48,7 +48,8 @@ This repository documents the steps and processes involved in provisioning infra
 #### Preparing the environment to run Terraform
 
 - Access the Google Cloud Console ([console.cloud.google.com](http://console.cloud.google.com/)) **and log in with your newly created account**
-![alt text](image-6.png)
+
+![alt text](images/image-6.png)
 
 - Download the mission1.zip file in the Google Cloud shell using the wget command
 - 
@@ -108,7 +109,7 @@ chmod +x *.sh
     ```
     
 - Click on Authorize
-![alt text](image-7.png)
+![alt text](images/image-7.png)
 
 - Execute the command below to set the project in the Google Cloud Shell
 ./gcp_set_project.sh
@@ -155,15 +156,15 @@ gcloud services enable servicenetworking.googleapis.com --project=$GOOGLE_CLOUD_
 ### Steps in Amazon Web Services (AWS)
 - Access AWS console and go to IAM service
 - Under Access management, Click in "Users", then "Add users". Insert the User name **luxxy-covid-testing-system-en-app1** and click in **Next** to create a programmatic user.
-![alt text](image-8.png)
+![alt text](images/image-8.png)
 - On Set permissions, Permissions options, click in "Attach policies directly" button.
-![alt text](image-9.png)
+![alt text](images/image-9.png)
 - Type **AmazonS3FullAccess** in **Search**.
 - Select **AmazonS3FullAccess**
-![alt text](image-10.png)
+![alt text](images/image-10.png)
 - Click in **Next**
 - Review all details and click in Create user
-![alt text](image-11.png)
+![alt text](images/image-11.png)
 
 #### **Steps to create access key:**
 
@@ -171,7 +172,7 @@ gcloud services enable servicenetworking.googleapis.com --project=$GOOGLE_CLOUD_
 - Go to Security credentials tab.
 - Scroll down and go to Access keys section.
 - Click on Create access key
-![alt text](image-12.png)
+![alt text](images/image-12.png)
 - Select **Command Line Interface (CLI)** and **I understand the above recommendation and want to proceed to create an access key** checkbox.
 - Click Next
 - Click on Create access key
@@ -197,7 +198,7 @@ cd ~
 unzip mission2.zip
 ```
 - Connect to MySQL DB running on Cloud SQL (once it prompts for the password, provide welcome123456). Don’t forget to replace the placeholder with your Cloud SQL Public IP
-![alt text](image-13.png)
+![alt text](images/image-13.png)
 ```
 mysql --host=<replace_with_public_ip_cloudsql> --port=3306 -u app -p
 ```
@@ -222,7 +223,7 @@ exit;
 
 - Enable Cloud Build API via Cloud Shell.
 gcloud services enable cloudbuild.googleapis.com
-![alt text](image-14.png)
+![alt text](images/image-14.png)
 - Build the Docker image and push it to Google Container Registry.
 ```
 GOOGLE_CLOUD_PROJECT_ID=$(gcloud config get-value project)
@@ -252,10 +253,10 @@ luxxy-covid-testing-system.yaml
           value: "172.21.0.3"
 - Connect to the GKE (Google Kubernetes Engine) cluster via Console
 ##### Step 1
-![alt text](image-15.png)
+![alt text](images/image-15.png)
 
 ##### Step 2
-![alt text](image-16.png)
+![alt text](images/image-16.png)
 
 - Deploy the application Luxxy in the Cluster
 ```
@@ -269,12 +270,12 @@ kubectl apply -f luxxy-covid-testing-system.yaml
 - Under **GKE** > **Workloads** > **Exposing Services**, get the application Public IP
     
     **Step 1**
-![alt text](image-17.png)
+![alt text](images/image-17.png)
 **Step 2**
-![alt text](image-18.png)
+![alt text](images/image-18.png)
 
 - You should see the app up & running!
-![alt text](image-19.png)
+![alt text](images/image-19.png)
 
 - (Optional) Download a sample COVID testing and add an entry in the application.
     
@@ -328,7 +329,7 @@ exit;
 
 - Connect to the AWS Cloud Shell
 Download the PDF files
--```
+```
 wget https://tcb-public-events.s3.amazonaws.com/icp/mission3.zip
 ```
 
@@ -346,6 +347,6 @@ cd mission3/en/pdf_files
 aws s3 sync . s3://**luxxy-covid-testing-system-pdf-en-xxxx**
 ```
 - Test the application. Upon migrating the data and files, you should be able to see the entries  under “View Guest Results” page.
-![alt text](image-20.png)
+![alt text](images/image-20.png)
 
-Congratulations! You have migrated an "on-premises" application & database to a MultiCloud Architecture!
+<!-- Congratulations! You have migrated an "on-premises" application & database to a MultiCloud Architecture! -->
