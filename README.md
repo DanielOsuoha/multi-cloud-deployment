@@ -182,7 +182,7 @@ gcloud services enable servicenetworking.googleapis.com --project=$GOOGLE_CLOUD_
 - Scroll down and go to Access keys section.
 - Click on Create access key
 ![alt text](images/image-12.png)
-- Select **Command Line Interface (CLI)** and **I understand the above recommendation and want to proceed to create an access key** checkbox.
+<!-- Select **Command Line Interface (CLI)** and **I understand the above recommendation and want to proceed to create an access key** checkbox.-->
 - Click Next
 - Click on Create access key
 - Click on Download .csv file
