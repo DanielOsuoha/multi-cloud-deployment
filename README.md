@@ -5,6 +5,7 @@ This repository documents the steps and processes involved in provisioning infra
 
 ## Table of Contents
 
+
 1. [Infrastructure Provisioning](#infrastructure-provisioning)
 2. [Application Containerization and Deployment](#application-containerization-and-deployment)
 3. [Cloud Migration and Database Management](#cloud-migration-and-database-management)
