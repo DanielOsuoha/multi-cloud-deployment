@@ -15,6 +15,7 @@ This repository documents the steps and processes involved in provisioning infra
 ![alt text](images/architecture.png)
 
 
+
 ## Infrastructure Provisioning
 
 ### Steps in Amazon Web Services (AWS)
