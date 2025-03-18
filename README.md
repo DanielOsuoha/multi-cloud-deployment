@@ -38,7 +38,7 @@ This repository documents the steps and processes involved in provisioning infra
 
 #### Creating the Access Key for the terraform-en-1 user using the IAM service
 
-![alt text](images/image-2.png)
+![alt text](images/user_view.png)
 
 - Click on the Security credentials tab
 
