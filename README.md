@@ -31,7 +31,7 @@ This repository documents the steps and processes involved in provisioning infra
 - After advancing, in Set permissions, click on the Attach existing policies directly button.
 - Type **AmazonS3FullAccess** in **Search.**
 - Select **AmazonS3FullAccess**
-![alt text](images/image-1.png)
+![alt text](images/IAM_setup.png)
 - Click on **Next**
 - Review all the details
 - Click on **Create user**
