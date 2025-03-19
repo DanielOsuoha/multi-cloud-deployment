@@ -49,7 +49,7 @@ This repository documents the steps and processes involved in provisioning infra
 ![alt text](images/security_cred.png)
 
 - Select Command Line Interface (CLI) and I understand the above recommendation and want to proceed to create an access key.
-![alt text](images/image-4.png)
+![alt text](images/access_cli.png)
 - Click on **Next**.
 - Click on **Create access key**
 ![alt text](images/image-5.png)
