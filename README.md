@@ -52,7 +52,7 @@ This repository documents the steps and processes involved in provisioning infra
 ![alt text](images/access_cli.png)
 - Click on **Next**.
 - Click on **Create access key**
-![alt text](images/image-5.png)
+![alt text](images/secret_access.png)
 - Click on Download .csv file
 - Once the download is complete, rename the .csv file to key.csv.
 
