@@ -60,7 +60,7 @@ This repository documents the steps and processes involved in provisioning infra
 
 - Access the Google Cloud Console ([console.cloud.google.com](http://console.cloud.google.com/)) **and log in with your newly created account**
 
-![alt text](images/image-6.png)
+![alt text](images/gcp_access_console.png)
 
 - Download the mission1.zip file in the Google Cloud shell using the wget command
 
