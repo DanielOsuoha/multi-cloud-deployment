@@ -119,7 +119,7 @@ gcloud config set project $GOOGLE_CLOUD_PROJECT_ID
 ```
 
 - Click on Authorize
-![alt text](images/image-7.png)
+![alt text](images/authorize.png)
 
 - Execute the command below to set the project in the Google Cloud Shell
 ./gcp_set_project.sh
